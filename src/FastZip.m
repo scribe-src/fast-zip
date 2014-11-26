@@ -1,5 +1,5 @@
 #import "FastZip.h"
-#import "Stubs.h"
+#import "FastZipStubs.h"
 
 @implementation FastZip
 

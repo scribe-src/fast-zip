@@ -15,7 +15,7 @@
     // prints every filename in the zip
     NSLog(@"%@", [zip keys]);
 
-    // lookup the data for a given file:
+    // look up the data for a given file:
     NSData *binaryData = [zip stringForKey: @"data.bin"];
 
     // if your file is has no NULL terminators:
