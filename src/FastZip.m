@@ -43,6 +43,8 @@
   // open!
   unzOpen2(NULL, &readFunctions);
 
+  unz_global_info info;
+  unzGetGlobalInfo(NULL, &info);
 }
 
 - (void) dealloc {

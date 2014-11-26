@@ -19,7 +19,9 @@ static unsigned long fread_file_func(
   FastZip *instance = (FastZip *)opaque;
   unsigned long rest = instance.size - instance.offset;
   size = (rest > size) ? size : rest;
-  memcpy(stream, &(instance.buffer[instance.offset]), size);
+  if (size > 0) {
+    memcpy(stream, &(instance.buffer[instance.offset]), size);
+  }
   instance.offset += size;
   return size;
 }
