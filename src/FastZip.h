@@ -2,24 +2,24 @@
 #import "unzip.h"
 
 @interface FastZip: NSObject {
-  char* curr;
   char* buffer;
-  int size;
+  unsigned long offset;
+  unsigned long size;
   NSMutableArray* keys;
   unzFile file;
 }
 
-+ (id) withBuffer: (char*) buff size: (int) sz;
++ (id) withBuffer: (char*) buff size: (unsigned long) sz;
 
-- (id) initWithBuffer: (char*) buffer size: (int) size;
+- (id) initWithBuffer: (char*) buffer size: (unsigned long) size;
 
 - (NSArray *) keys;
 
 - (NSData *)  objectForKey: (NSString *) key;
 
 @property (readonly) char* buffer;
-@property (readonly) char* curr;
-@property (readonly) int size;
+@property (readonly) unsigned long offset;
+@property (readonly) unsigned long size;
 @property (readonly, retain) NSArray *keys;
 
 @end

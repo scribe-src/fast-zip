@@ -12,11 +12,11 @@ TEST(FastZipDotBuffer)
 
 END_TEST
 
-TEST(FastZipDotCurrIsHeadOfBuffer)
+TEST(FastZipDotOffsetIs0)
 
   char a;
   FastZip *f = [[FastZip alloc] initWithBuffer: &a size: 1];
-  AssertEqual(f.curr, &a);
+  AssertIntEqual(f.offset, 0);
   [f release];
 
 END_TEST
