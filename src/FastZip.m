@@ -2,10 +2,13 @@
 
 @implementation FastZip
 
-- (id) initWithBuffer: (const char*) buff {
+@synthesize buffer, curr, size;
+
+- (id) initWithBuffer: (char*) buff size: (int) sz {
   if (self = [super init]) {
     buffer = buff;
     curr = buff;
+    size = sz;
   }
   return self;
 }
