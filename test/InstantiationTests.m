@@ -12,15 +12,6 @@ TEST(FastZipDotBuffer)
 
 END_TEST
 
-TEST(FastZipDotOffsetIs0)
-
-  char a;
-  FastZip *f = [[FastZip alloc] initWithBuffer: &a size: 1];
-  AssertIntEqual(f.offset, 0);
-  [f release];
-
-END_TEST
-
 TEST(FastZipDotSize)
 
   char a;

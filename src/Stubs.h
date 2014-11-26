@@ -2,7 +2,7 @@
 
 // this doesn't actually do anything, since the buffer is already in memory
 static void* fopen_file_func(void* opaque, const char* filename, int mode) {
-  return NULL;
+  return (void*)1; // must be non-NULL
 }
 
 // this doesn't actually do anything, since the buffer is already in memory
@@ -38,7 +38,20 @@ static long fseek_file_func(
   int origin) {
 
   FastZip *instance = (FastZip *)opaque;
-  instance.offset = offset;
+  switch (origin) {
+    case ZLIB_FILEFUNC_SEEK_CUR:
+      instance.offset += offset;
+      break;
+    case ZLIB_FILEFUNC_SEEK_END:
+      instance.offset = instance.size;
+      break;
+    case ZLIB_FILEFUNC_SEEK_SET:
+      instance.offset = offset;
+      break;
+    default:
+      return -1;
+  }
+  
   return offset;
 }
 
