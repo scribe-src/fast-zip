@@ -20,7 +20,7 @@ static unsigned long fread_file_func(
   unsigned long rest = instance.size - instance.offset;
   size = (rest > size) ? size : rest;
   if (size > 0) {
-    memcpy(stream, &(instance.buffer[instance.offset]), size);
+    memcpy(buf, &(instance.buffer[instance.offset]), size);
   }
   instance.offset += size;
   return size;
