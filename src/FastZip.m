@@ -1,5 +1,6 @@
 #import "FastZip.h"
 
+
 @implementation FastZip
 
 @synthesize buffer, curr, size, keys;
@@ -22,8 +23,13 @@
   return nil;
 }
 
+- (void) parseBuffer {
+  zlib_filefunc_def readFunctions;
+  file = unzOpen2(NULL, &readFunctions);
+}
+
 - (void) dealloc {
-  [keys release];
+  [keys release], keys = nil;
   [super dealloc];
 }
 

@@ -1,7 +1,7 @@
 CC=clang
 
 BUILD_DIR=./build
-INCLUDES=-I./src/ -I./lib
+INCLUDES=-I./src/ -I./deps/minizip/
 FRAMEWORKS=-framework Foundation
 CFLAGS=-undefined suppress -dynamiclib -flat_namespace $(FRAMEWORKS) -lz
 

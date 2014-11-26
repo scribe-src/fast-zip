@@ -1,10 +1,12 @@
 #import <Foundation/Foundation.h>
+#import "unzip.h"
 
 @interface FastZip: NSObject {
   char* curr;
   char* buffer;
   int size;
   NSMutableArray* keys;
+  unzFile file;
 }
 
 + (id) withBuffer: (char*) buff size: (int) sz;
