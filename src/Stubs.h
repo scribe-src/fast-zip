@@ -52,7 +52,7 @@ static long fseek_file_func(
       return -1;
   }
   
-  return offset;
+  return 0;
 }
 
 static int fclose_file_func(void* opaque, void* stream) {

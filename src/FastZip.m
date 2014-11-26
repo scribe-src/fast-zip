@@ -41,10 +41,25 @@
   readFunctions.opaque = self;
 
   // open!
-  unzOpen2(NULL, &readFunctions);
+  file = unzOpen2(NULL, &readFunctions);
 
-  // unz_global_info info;
-  // unzGetGlobalInfo(NULL, &info);
+  unz_global_info info;
+  if (unzGetGlobalInfo(file, &info) == UNZ_OK) {
+    // printf("%d\n", info.number_entry);
+    // printf("%ld\n", info.number_disk_with_CD);
+    // printf("%ld\n", info.size_comment);
+
+    for (int i = 0; i < info.number_entry; i++) {
+      char filename[1024];
+      unzOpenCurrentFile(file);
+      unz_file_info fileInfo;
+      unzGetCurrentFileInfo(file, &fileInfo, filename, 1024, NULL, 0, NULL, 0);
+      [keys addObject: [NSString stringWithCString: filename encoding: NSASCIIStringEncoding]];
+
+      unzCloseCurrentFile(file);
+      unzGoToNextFile(file);
+    }
+  }
 }
 
 - (void) dealloc {
