@@ -1,6 +1,6 @@
 `fast-zip` implements a small Objective-C wrapper around `minizip` that allows for in-memory ZIP access. No ARC support at this time.
 
-#### Set up
+#### Setup
 
     $ git submodule update --init --recursive
 
