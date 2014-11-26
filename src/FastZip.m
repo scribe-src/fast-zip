@@ -56,6 +56,25 @@
 }
 
 - (NSData *) compressedDataForKey: (NSString *) key {
+  NSUInteger index = [keys indexOfObject: key];
+
+  if (index != NSNotFound) {
+    unzGoToFirstFile(file);
+    for (int i = 0; i < index; i++) {
+      unzGoToNextFile(file);
+    }
+    int compressionMethod, compressionLevel;
+    unzOpenCurrentFile2(file, &compressionMethod, &compressionLevel, 1);
+    unz_file_info fileInfo;
+    unzGetCurrentFileInfo(file, &fileInfo, NULL, 0, NULL, 0, NULL, 0);
+
+    int len = fileInfo.compressed_size;
+    void* buf = malloc(len);
+    unzReadCurrentFile(file, buf, len);
+    unzCloseCurrentFile(file);
+    return [NSData dataWithBytesNoCopy: buf length: len freeWhenDone: YES];
+  }
+
   return nil;
 }
 

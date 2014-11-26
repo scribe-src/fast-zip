@@ -47,4 +47,13 @@ TEST(ATxtZipFileDecompressesStringCorrectly)
 
 END_TEST
 
+TEST(ATxtZipFileLookupCompressedData)
+
+  NSData *data = [NSData dataWithContentsOfFile: @"./test/data/a.txt.zip"];
+  FastZip *zip = [[FastZip alloc] initWithBuffer: (char*)[data bytes] size: [data length]];
+  AssertNotNil([zip compressedDataForKey: @"a.txt"]);
+  [zip release];
+
+END_TEST
+
 END_TEST_SUITE
