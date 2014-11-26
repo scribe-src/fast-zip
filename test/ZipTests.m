@@ -28,4 +28,23 @@ TEST(ATxtZipFileContainsTheFileADotTxt)
 
 END_TEST
 
+TEST(ATxtZipFileDecompressesCorrectly)
+
+  NSData *data = [NSData dataWithContentsOfFile: @"./test/data/a.txt.zip"];
+  FastZip *zip = [[FastZip alloc] initWithBuffer: (char*)[data bytes] size: [data length]];
+  AssertObjEqual([NSString stringWithUTF8String: [[zip dataForKey: @"a.txt"] bytes]], @"a");
+  [zip release];
+
+END_TEST
+
+
+TEST(ATxtZipFileDecompressesStringCorrectly)
+
+  NSData *data = [NSData dataWithContentsOfFile: @"./test/data/a.txt.zip"];
+  FastZip *zip = [[FastZip alloc] initWithBuffer: (char*)[data bytes] size: [data length]];
+  AssertObjEqual([zip stringForKey: @"a.txt"], @"a");
+  [zip release];
+
+END_TEST
+
 END_TEST_SUITE
