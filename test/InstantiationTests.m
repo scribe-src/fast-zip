@@ -30,6 +30,15 @@ TEST(FastZipDotSize)
 
 END_TEST
 
+TEST(FastZipDotKeys)
+
+  char a;
+  FastZip *f = [[FastZip alloc] initWithBuffer: &a size: 1];
+  AssertIntEqual(f.keys.count, 0);
+  [f release];
+
+END_TEST
+
 TEST(StaticMethodConstructor)
 
   char a;

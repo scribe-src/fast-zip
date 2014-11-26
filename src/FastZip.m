@@ -2,7 +2,7 @@
 
 @implementation FastZip
 
-@synthesize buffer, curr, size;
+@synthesize buffer, curr, size, keys;
 
 + (id) withBuffer: (char*) buff size: (int) sz {
   return [[[self alloc] initWithBuffer: buff size: sz] autorelease];
@@ -13,16 +13,18 @@
     buffer = buff;
     curr = buff;
     size = sz;
+    keys = [NSMutableArray new];
   }
   return self;
 }
 
-- (NSArray *) keys {
-  return (NSArray *)keys;
-}
-
 - (NSData *) objectForKey: (NSString *) key {
   return nil;
+}
+
+- (void) dealloc {
+  [keys release];
+  [super dealloc];
 }
 
 @end

@@ -18,5 +18,6 @@
 @property (readonly) char* buffer;
 @property (readonly) char* curr;
 @property (readonly) int size;
+@property (readonly, retain) NSArray *keys;
 
 @end
