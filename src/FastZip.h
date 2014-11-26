@@ -9,8 +9,10 @@
   unzFile file;
 }
 
++ (id) withData: (NSData *) data;
 + (id) withBuffer: (char*) buff size: (unsigned long) sz;
 
+- (id) initWithData: (NSData *) data;
 - (id) initWithBuffer: (char*) buffer size: (unsigned long) size;
 
 - (NSArray *) keys;

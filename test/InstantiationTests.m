@@ -6,23 +6,27 @@ static int emptyLen = 22;
 
 TEST_SUITE(InstantiationTests)
 
-TEST(FastZipDotBuffer)
-  FastZip *f = [FastZip withBuffer: empty size: emptyLen];
-  AssertEqual(f.buffer, empty);
+TEST(FastZipFromBufferAlloc)
+  FastZip *f = [[FastZip alloc] initWithBuffer: empty size: emptyLen];
+  AssertIntEqual(f.size, emptyLen);
+  [f release];
 END_TEST
 
-TEST(FastZipDotSize)
+TEST(FastZipFromBufferStaticConstructor)
   FastZip *f = [FastZip withBuffer: empty size: emptyLen];
   AssertIntEqual(f.size, emptyLen);
 END_TEST
 
-TEST(FastZipDotKeys)
-  FastZip *f = [FastZip withBuffer: empty size: emptyLen];
-  AssertIntEqual(f.keys.count, 0);
+TEST(FastZipFromNSDataAlloc)
+  NSData *data = [NSData dataWithBytes: empty length: emptyLen];
+  FastZip *f = [[FastZip alloc] initWithData: data];
+  AssertIntEqual(f.size, emptyLen);
+  [f release];
 END_TEST
 
-TEST(StaticMethodConstructor)
-  FastZip *f = [FastZip withBuffer: empty size: emptyLen];
+TEST(FastZipFromNSDataStaticConstructor)
+  NSData *data = [NSData dataWithBytes: empty length: emptyLen];
+  FastZip *f = [FastZip withData: data];
   AssertIntEqual(f.size, emptyLen);
 END_TEST
 

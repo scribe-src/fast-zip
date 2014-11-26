@@ -14,7 +14,7 @@ TEST(ATxtZipFileContainsFiles)
 
   NSData *data = [NSData dataWithContentsOfFile: @"./test/data/a.txt.zip"];
   FastZip *zip = [[FastZip alloc] initWithBuffer: (char*)[data bytes] size: [data length]];
-  Assert(zip.keys.count > 0);
+  Assert(zip.keys.count == 1);
   [zip release];
 
 END_TEST

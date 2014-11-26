@@ -5,8 +5,16 @@
 
 @synthesize buffer, offset, size, keys;
 
++ (id) withData: (NSData *) data {
+  return [[[self alloc] initWithData: data] autorelease];
+}
+
 + (id) withBuffer: (char*) buff size: (unsigned long) sz {
   return [[[self alloc] initWithBuffer: buff size: sz] autorelease];
+}
+
+- (id) initWithData: (NSData *) data {
+  return [self initWithBuffer: (char*)[data bytes] size: [data length]];
 }
 
 - (id) initWithBuffer: (char*) buff size: (unsigned long) sz {
@@ -22,6 +30,10 @@
 }
 
 - (NSData *) objectForKey: (NSString *) key {
+  return nil;
+}
+
+- (NSData *) decompressedObjectForKey: (NSString *) key {
   return nil;
 }
 
@@ -50,10 +62,10 @@
     // printf("%ld\n", info.size_comment);
 
     for (int i = 0; i < info.number_entry; i++) {
-      char filename[1024];
+      char filename[2048];
       unzOpenCurrentFile(file);
       unz_file_info fileInfo;
-      unzGetCurrentFileInfo(file, &fileInfo, filename, 1024, NULL, 0, NULL, 0);
+      unzGetCurrentFileInfo(file, &fileInfo, filename, 2048, NULL, 0, NULL, 0);
       [keys addObject: [NSString stringWithCString: filename encoding: NSASCIIStringEncoding]];
 
       unzCloseCurrentFile(file);
