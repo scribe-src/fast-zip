@@ -6,6 +6,7 @@
   unsigned long offset;
   unsigned long size;
   NSMutableArray* keys;
+  NSData *data;
   unzFile file;
 }
 

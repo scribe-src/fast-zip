@@ -13,7 +13,8 @@
   return [[[self alloc] initWithBuffer: buff size: sz] autorelease];
 }
 
-- (id) initWithData: (NSData *) data {
+- (id) initWithData: (NSData *) _data {
+  data = [_data retain];
   return [self initWithBuffer: (char*)[data bytes] size: [data length]];
 }
 
@@ -116,6 +117,7 @@
 }
 
 - (void) dealloc {
+  [data release], data = nil;
   [keys release], keys = nil;
   [super dealloc];
 }
