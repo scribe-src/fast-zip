@@ -8,6 +8,22 @@
 
     $ git submodule update --init --recursive
 
+#### Sample Code
+
+    FastZip *zip = [FastZip withData: data];
+
+    // prints every filename in the zip
+    NSLog(@"%@", [zip keys]);
+
+    // lookup the data for a given file:
+    NSData *binaryData = [zip stringForKey: @"data.bin"];
+
+    // if your file is has no NULL terminators:
+    NSString *jsonString = [zip stringForKey: @"config.json"];
+
+    // you can also get the raw compressed data
+    NSData *zippedData = [zip compressedDataForKey: @"data.bin"];
+
 #### Build
 
     $ make all

@@ -16,7 +16,6 @@
 - (id) initWithBuffer: (char*) buffer size: (unsigned long) size;
 
 - (NSArray *) keys;
-
 - (NSData *) dataForKey: (NSString *) key;
 - (NSString *) stringForKey: (NSString *) key;
 - (NSData *) compressedDataForKey: (NSString *) key;
