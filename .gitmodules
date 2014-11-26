@@ -1,0 +1,6 @@
+[submodule "deps/minizip"]
+	path = deps/minizip
+	url = https://github.com/nmoinvaz/minizip.git
+[submodule "deps/objc-unit"]
+	path = deps/objc-unit
+	url = https://github.com/scribe-src/objc-unit

@@ -5,12 +5,13 @@
 - (id) initWithBuffer: (const char*) buff {
   if (self = [super init]) {
     buffer = buff;
+    curr = buff;
   }
   return self;
 }
 
 - (NSArray *) keys {
-  return nil;
+  return (NSArray *)keys;
 }
 
 - (NSData *) objectForKey: (NSString *) key {
