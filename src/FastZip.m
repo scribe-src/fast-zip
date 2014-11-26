@@ -14,17 +14,39 @@ static unsigned long fread_file_func(
   void* opaque,
   void* stream,
   void* buf,
-  unsigned long size)
+  unsigned long size) {
 
-{
   FastZip *instance = (FastZip *)opaque;
   unsigned long rest = instance.size - instance.offset;
   size = (rest > size) ? size : rest;
   memcpy(stream, &(instance.buffer[instance.offset]), size);
+  instance.offset += size;
   return size;
 }
 
+static long ftell_file_func(void* opaque, void* stream) {
+  FastZip *instance = (FastZip *)opaque;
+  return instance.offset;
+}
 
+static long fseek_file_func(
+  void* opaque,
+  void* stream,
+  unsigned long offset,
+  int origin) {
+
+  FastZip *instance = (FastZip *)opaque;
+  instance.offset = offset;
+  return offset;
+}
+
+static int fclose_file_func(void* opaque, void* stream) {
+  return 0;
+}
+
+static int ferror_file_func(void* opaque, void* stream) {
+  return 0;
+}
 
 
 @implementation FastZip
@@ -56,7 +78,12 @@ static unsigned long fread_file_func(
   zlib_filefunc_def readFunctions;
   readFunctions.zopen_file = &fopen_file_func;
   readFunctions.zopendisk_file = &fopendisk_file_func;
-  readFunctions.zread_file = 
+  readFunctions.zread_file = &fread_file_func;
+  readFunctions.zwrite_file = NULL; // we never write to a zip
+  readFunctions.ztell_file = &ftell_file_func;
+  readFunctions.zseek_file = &fseek_file_func;
+  readFunctions.zclose_file = &fclose_file_func;
+  readFunctions.zerror_file = &ferror_file_func;
 
   // ensure a reference to ourself gets passed around to everyone
   readFunctions.opaque = self;

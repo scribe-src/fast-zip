@@ -18,7 +18,7 @@
 - (NSData *)  objectForKey: (NSString *) key;
 
 @property (readonly) char* buffer;
-@property (readonly) unsigned long offset;
+@property unsigned long offset;
 @property (readonly) unsigned long size;
 @property (readonly, retain) NSArray *keys;
 
