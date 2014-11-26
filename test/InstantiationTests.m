@@ -30,4 +30,12 @@ TEST(FastZipDotSize)
 
 END_TEST
 
+TEST(StaticMethodConstructor)
+
+  char a;
+  FastZip *f = [FastZip withBuffer: &a size: 1];
+  AssertIntEqual(f.size, 1);
+
+END_TEST
+
 END_TEST_SUITE

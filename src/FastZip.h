@@ -7,6 +7,8 @@
   NSMutableArray* keys;
 }
 
++ (id) withBuffer: (char*) buff size: (int) sz;
+
 - (id) initWithBuffer: (char*) buffer size: (int) size;
 
 - (NSArray *) keys;
